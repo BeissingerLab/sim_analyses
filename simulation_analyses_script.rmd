@@ -2,7 +2,6 @@
 title: "Simulation Analyses for IBM population"
 output: html_document
 ---
-
 ```{r}
 library("qtl")
 library("rmarkdown")
@@ -11,7 +10,7 @@ library("rmarkdown")
 
 ##Read matrix of all simulated data
 ```{r}
-allSims <- read.table(file = "all_sim_data/simulation_analyses_0.6/simulation_data/Simulated.Data.100.Reps.Herit.0.6.txt",header=T,stringsAsFactors=F)
+allSims <- read.table(file = "all_sim_data/simulation_analyses_0.2/simulation_data/Simulated.Data.100.Reps.Herit.0.2.txt",header=T,stringsAsFactors=F)
 ```
 
 ##Read genotypes
@@ -21,19 +20,19 @@ genos <- read.csv("all_sim_data/IBM_sample_final1.csv",header=T,stringsAsFactors
 
 ##Create Matrices for data to be inserted in to
 ```{r}
-setwd("all_sim_data/simulation_analyses_0.6")
+setwd("all_sim_data/simulation_analyses_0.2")
 sigs <- read.table(file = "simulation_data/Genotypic.information.for.4.Additive.QTN.txt",stringsAsFactors=F,header=T)[,1]
 twosigs <- read.table(file = "simulation_data/Genotypic.information.for.4.Epistatic.QTN.txt",stringsAsFactors=F,header=T)[,1]
 results <- matrix(NA,nrow=100,ncol=5)
-two.full <- matrix(NA, nrow = 9, ncol = 100)
-two.add <- matrix(NA, nrow = 9, ncol = 100)
+tworesults <- matrix(NA, nrow = 9, ncol = 100)
 rownames(tworesults) <- c("threshold",twosigs)
 ```
+
 ##Loop over analysis
 ###Composite Interval Mapping (Additive search)
 ```{r}
-setwd("/all_sim_data/simulation_analyses_0.6")
-for(i in 2:5){
+setwd("all_sim_data/simulation_analyses_0.2")
+for(i in 2:ncol(allSims)){
 
   genos.tmp <- genos
   genos.tmp[,1] <- c("","",allSims[,i])
@@ -60,16 +59,12 @@ for(i in 2:5){
   results[i-1,1:5] <- first
 }
 ```
-
 ###Scantwo (epistatic search)
 ```{r}
 f <- function(foo) {
     foo[upper.tri(foo)] <- t(foo)[upper.tri(foo)]
     foo}
-g <- function(foo){
-  foo[lower.tri(foo)] <- t(foo)[lower.tri(foo)]
-    foo}
-setwd("all_sim_data/simulation_analyses_0.6")
+setwd("all_sim_data/simulation_analyses_0.2")
 for(i in 1:100){
   
   sim <- read.cross(format = "csv", ".", file=paste(i,".genos.tmp.csv"),
@@ -80,46 +75,34 @@ for(i in 1:100){
   
   scantwo <- scantwo(sim, chr = c(1,2,3,4,5,6,7,8,9,10), pheno.col = 1, model = "normal", method = "hk", addcovar = NULL, intcovar = NULL, weights = NULL, use = "all.obs")
   
-  scantwoperms <- scantwo(sim, chr = c(1,2,3,4,5,6,7,8,9,10), pheno.col = 1, model = "normal", method = "hk", addcovar = NULL, intcovar = NULL, weights = NULL, use = "all.obs", n.perm = 1)
+  scantwoperms <- scantwo(sim, chr = c(1,2,3,4,5,6,7,8,9,10), pheno.col = 1, model = "normal", method = "hk", addcovar = NULL, intcovar = NULL, weights = NULL, use = "all.obs", n.perm = 100)
   
   scantwosum <- summary(scantwo, perm = scantwoperms, alpha = 0.05)
   twothresh <- summary(scantwoperms)[[1]][1]
   
   foo <- matrix(scantwo$lod, nrow = 1339, ncol = 1339)
-  foo.full <- f(foo)
-  foo.add <- g(foo)
-  rownames(foo.full) <- rownames(CIM)
-  colnames(foo.full) <- rownames(CIM)
-  rownames(foo.add) <- rownames(CIM)
-  colnames(foo.add) <- rownames(CIM)
-  full1x2 <- foo.full[rownames = twosigs[1],colnames = twosigs[2]]
+  foo <- f(foo)
+  rownames(foo) <- rownames(CIM)
+  colnames(foo) <- rownames(CIM)
   
-  full3x4 <- foo.full[rownames = twosigs[3],colnames = twosigs[4]]
+  int1x2 <- foo[rownames = twosigs[1],colnames = twosigs[2]]
   
-  full5x6 <- foo.full[rownames = twosigs[5],colnames = twosigs[6]]
+  int3x4 <- foo[rownames = twosigs[3],colnames = twosigs[4]]
   
-  full7x8 <- foo.full[rownames = twosigs[7],colnames = twosigs[8]]
+  int5x6 <- foo[rownames = twosigs[5],colnames = twosigs[6]]
   
-  add1x2 <- foo.add[rownames = twosigs[1],colnames = twosigs[2]]
+  int7x8 <- foo[rownames = twosigs[7],colnames = twosigs[8]]
   
-  add3x4 <- foo.add[rownames = twosigs[3],colnames = twosigs[4]]
+  twocols <- rbind(twothresh,int1x2,"",int3x4,"",int5x6,"",int7x8,"") 
   
-  add5x6 <- foo.add[rownames = twosigs[5],colnames = twosigs[6]]
-  
-  add7x8 <- foo.add[rownames = twosigs[7],colnames = twosigs[8]]
-  
-  full.cols <- rbind(twothresh,full1x2,"",full3x4,"",full5x6,"",full7x8,"") 
-  add.cols <- rbind(twothresh,add1x2,"",add3x4,"",add5x6,"",add7x8,"")
-  two.full[,i] <- full.cols
-  two.add[,i] <- add.cols
-  }
+  tworesults[,i] <- twocols
+}
 ```
 
 ##Export results to csv files
 ```{r}
-  setwd("all_sim_data/simulation_analyses_0.6")
-write.csv(two.full, file = paste("results.epistatic.full.0.6.csv"))
-write.csv(two.add, file = paste("results.epistatic.add.0.6.csv"))
+  setwd("all_sim_data/simulation_analyses_her0.2")
+write.csv(tworesults, file = paste("results.epistatic.0.2.csv"))
 
-write.csv(results, file = paste("results.additive.0.6.csv"))
+write.csv(results, file = paste("results.additive.0.2.csv"))
 ```
