@@ -19,6 +19,7 @@ allSims <- read.table(file = "/Users/hia5y7/Desktop/R/Simulations/EMP/EMPandAddi
 genos <- read.csv("/Users/hia5y7/Desktop/R/Simulations/EMP/EMP_Genos_for_QTL.csv", header=T, stringsAsFactors=F, na.strings=c("-","NA"))[1:193,]
 colnames(genos) <- genos[1,]
 genos <- genos[2:193,]
+genos <- genos[which(genos[2,] != ".")]
 ```
 
 ##Create Matrices for data to be inserted in to
