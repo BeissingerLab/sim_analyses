@@ -1,6 +1,6 @@
 rm(list = ls())
 ##Create object with correct format for data to run simulation on 
-Data <- read.csv("C:/Users/hia5y7/Desktop/R/EMP_genos.csv",stringsAsFactors=F,na.strings=c("-","NA"))
+Data <- read.csv("C:/Users/hia5y7/Desktop/R/Idealized_EMP_genos.csv",stringsAsFactors=F,na.strings=c("-","NA"))
 Data2 <- as.matrix(Data)
 Data3 <- Data2[,1:5]
 Data4 <- cbind(Data3,Data2[,6:ncol(Data2)])
