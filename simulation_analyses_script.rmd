@@ -5,19 +5,19 @@ output: html_document
 
 ##Read matrix of all simulated data
 ```{r}
-allSims <- read.table(file = "../all_sim_data/simulation_analyses_0.6/simulation_data/Simulated.Data.100.Reps.Herit.0.6.txt",header=T,stringsAsFactors=F)
+allSims <- read.table(file = "all_sim_data/simulation_analyses_0.6/simulation_data/Simulated.Data.100.Reps.Herit.0.6.txt",header=T,stringsAsFactors=F)
 ```
 
 ##Read genotypes
 ```{r}
-genos <- read.csv("../all_sim_data/simulation_analyses_0.6/IBM_sample_final1.csv",header=T,stringsAsFactors=F,na.strings=c("-","NA"))
+genos <- read.csv("all_sim_data/simulation_analyses_0.6/IBM_sample_final1.csv",header=T,stringsAsFactors=F,na.strings=c("-","NA"))
 ```
 
 ##Create Matrices for data to be inserted in to
 ```{r}
 setwd("all_sim_data/simulation_analyses_0.6")
-sigs <- read.table(file = "../all_sim_data/simulation_analyses_0.6/simulation_data/Genotypic.information.for.4.Additive.QTN.txt",stringsAsFactors=F,header=T)[,1]
-twosigs <- read.table(file = "../all_sim_data/simulation_analyses_0.6/simulation_data/Genotypic.information.for.4.Epistatic.QTN.txt",stringsAsFactors=F,header=T)[,1]
+sigs <- read.table(file = "/simulation_data/Genotypic.information.for.4.Additive.QTN.txt",stringsAsFactors=F,header=T)[,1]
+twosigs <- read.table(file = "/simulation_data/Genotypic.information.for.4.Epistatic.QTN.txt",stringsAsFactors=F,header=T)[,1]
 results <- matrix(NA,nrow=100,ncol=5)
 two.full <- matrix(NA, nrow = 9, ncol = 100)
 two.add <- matrix(NA, nrow = 9, ncol = 100)
@@ -26,7 +26,7 @@ rownames(tworesults) <- c("threshold",twosigs)
 ##Loop over analysis
 ###Composite Interval Mapping (Additive search)
 ```{r}
-setwd("../all_sim_data/simulation_analyses_0.6")
+setwd("/all_sim_data/simulation_analyses_0.6")
 for(i in 2:5){
 
   genos.tmp <- genos
