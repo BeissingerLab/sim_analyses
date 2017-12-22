@@ -194,9 +194,9 @@ Additive.QTN.number <- 4
 
 #Number of epistatic QTN (m)
 Epistatic.QTN.number <- 4
-for(i in 1:9){
+
 #Vector of heritabilities to investigate
-heritabilities.vector <- as.numeric(paste(0,i,sep = "."))
+heritabilities.vector <- 0.1
 
 #Size of the additive effect of the largest QTL (must be (-1,1) but preferably (0,1))
 additive.effect <- 0.6
@@ -215,9 +215,6 @@ output.dir <- paste("EMPandAdditive",Additive.QTN.number,"_Add_QTN_",Epistatic.Q
 ################
 #Create the simulated data
 create.simluated.data()
-setwd("../")
-}
-
 
 
 
