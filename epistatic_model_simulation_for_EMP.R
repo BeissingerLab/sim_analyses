@@ -172,7 +172,7 @@ create.simluated.data <- function(){
 ###########################################################################################
 ###########################################################################################
 #setwd("/Users/adminuser/Box Sync/Lipka_Mainzer_Chen_Epistasis_Shared_Folder/Simulation_Study")
-setwd("C:/Users/hia5y7/Desktop/R/")
+setwd("C:/Users/hia5y7/Desktop/R/Simulations/EMP")
 home.dir <- getwd()
 #dir.of.GBS.SNPs <- "/Users/adminuser/Desktop/Work/Tocos_NAM_2009_2010/Joint_Linkage_Analysis/GBS_SNPs/"
 
@@ -196,7 +196,7 @@ Additive.QTN.number <- 4
 Epistatic.QTN.number <- 4
 
 #Vector of heritabilities to investigate
-heritabilities.vector <- 0.1
+heritabilities.vector <- 0.2
 
 #Size of the additive effect of the largest QTL (must be (-1,1) but preferably (0,1))
 additive.effect <- 0.6
