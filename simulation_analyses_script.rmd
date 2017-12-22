@@ -3,6 +3,12 @@ title: "Simulation Analyses"
 output: html_document
 ---
 
+```{r}
+library("qtl")
+library("rmarkdown")
+```
+
+
 ##Read matrix of all simulated data
 ```{r}
 allSims <- read.table(file = "all_sim_data/simulation_analyses_0.6/simulation_data/Simulated.Data.100.Reps.Herit.0.6.txt",header=T,stringsAsFactors=F)
