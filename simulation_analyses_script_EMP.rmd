@@ -33,7 +33,7 @@ rownames(tworesults) <- c("threshold",twosigs)
 
 ##Loop over analysis
 ###Composite Interval Mapping (Additive search)
-```{r}
+```{r include=FALSE}
 setwd("/Users/hia5y7/Desktop/R/Simulations/EMP/EMPandAdditive4_Add_QTN_4_Epi_QTN_h.2_0.2_add.eff_0.6_epis.eff_0.6_reps_100/")
 for(i in 2:ncol(allSims)){
 
@@ -63,7 +63,7 @@ for(i in 2:ncol(allSims)){
 }
 ```
 ###Scantwo (epistatic search)
-```{r}
+```{r include =FALSE}
 f <- function(foo) {
     foo[upper.tri(foo)] <- t(foo)[upper.tri(foo)]
     foo}
@@ -71,7 +71,7 @@ setwd("/Users/hia5y7/Desktop/R/Simulations/EMP/EMPandAdditive4_Add_QTN_4_Epi_QTN
 for(i in 1:100){
   
   sim <- read.cross(format = "csv", ".", file=paste(i,".genos.tmp.csv"),
-                    na.strings=c("-","NA"), genotypes = c("A","B"))
+                    na.strings=c("-","NA"), genotypes = c(0,0.5,1))
   sim <- jittermap(sim, 1e-6)
   sim <- convert2riself(sim)
   sim <- calc.genoprob(sim)
