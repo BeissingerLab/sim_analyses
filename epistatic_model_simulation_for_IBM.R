@@ -192,11 +192,11 @@ genotypes <- Data5
 #User input
 
 #Number of additive QTN (k)
-Additive.QTN.number <- 4
+Additive.QTN.number <- 400
 
 
 #Number of epistatic QTN (m)
-Epistatic.QTN.number <- 4
+Epistatic.QTN.number <- 400
 for(i in 1:9){
 #Vector of heritabilities to investigate
 heritabilities.vector <- as.numeric(paste(0,i,sep = "."))

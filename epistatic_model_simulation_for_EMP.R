@@ -189,11 +189,11 @@ genotypes <- Data5
 #User input
 
 #Number of additive QTN (k)
-Additive.QTN.number <- 4
+Additive.QTN.number <- 400
 
 
 #Number of epistatic QTN (m)
-Epistatic.QTN.number <- 4
+Epistatic.QTN.number <- 400
 
 #Vector of heritabilities to investigate
 heritabilities.vector <- 0.2
