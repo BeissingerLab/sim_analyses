@@ -1,6 +1,6 @@
 rm(list = ls())
 ##Create object with correct format for data to run simulation on 
-Data <- read.csv("C:/Users/hia5y7/Desktop/R/Idealized_EMP_genos.csv",stringsAsFactors=F,na.strings=c("-","NA"))
+Data <- read.csv("C:/Users/hiagh/Desktop/R/Idealized_EMP_genos.csv",stringsAsFactors=F,na.strings=c("-","NA"))
 Data2 <- as.matrix(Data)
 Data3 <- Data2[,1:5]
 Data4 <- cbind(Data3,Data2[,6:ncol(Data2)])
@@ -172,7 +172,7 @@ create.simluated.data <- function(){
 ###########################################################################################
 ###########################################################################################
 #setwd("/Users/adminuser/Box Sync/Lipka_Mainzer_Chen_Epistasis_Shared_Folder/Simulation_Study")
-setwd("C:/Users/hia5y7/Desktop/R/Simulations/EMP")
+setwd("C:/Users/hiagh/Desktop/R/all_sim_data/")
 home.dir <- getwd()
 #dir.of.GBS.SNPs <- "/Users/adminuser/Desktop/Work/Tocos_NAM_2009_2010/Joint_Linkage_Analysis/GBS_SNPs/"
 
@@ -195,8 +195,10 @@ Additive.QTN.number <- 400
 #Number of epistatic QTN (m)
 Epistatic.QTN.number <- 400
 
-#Vector of heritabilities to investigate
-heritabilities.vector <- 0.2
+for(i in 1:9){
+  #Vector of heritabilities to investigate
+  heritabilities.vector <- as.numeric(paste(0,i,sep = "."))
+  
 
 #Size of the additive effect of the largest QTL (must be (-1,1) but preferably (0,1))
 additive.effect <- 0.6
@@ -215,6 +217,4 @@ output.dir <- paste("EMPandAdditive",Additive.QTN.number,"_Add_QTN_",Epistatic.Q
 ################
 #Create the simulated data
 create.simluated.data()
-
-
-
+setwd("../")}

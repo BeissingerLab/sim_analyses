@@ -1,6 +1,6 @@
 rm(list = ls())
 ##Create object with correct format for data to run simulation on 
-Data <- read.csv("C:/Users/hia5y7/Desktop/R/IBM_Data/IBM_sample_data.csv",stringsAsFactors=F,na.strings=c("-","NA"))
+Data <- read.csv("C:/Users/hiagh/Desktop/R/IBM_Data/IBM_sample_data.csv",stringsAsFactors=F,na.strings=c("-","NA"))
 Data2 <- as.matrix(Data)
 Data3 <- Data2[,1:5]
 Data2[which(Data2 == "A")] <- 0
@@ -175,7 +175,7 @@ create.simluated.data <- function(){
 ###########################################################################################
 ###########################################################################################
 #setwd("/Users/adminuser/Box Sync/Lipka_Mainzer_Chen_Epistasis_Shared_Folder/Simulation_Study")
-setwd("C:/Users/hia5y7/Desktop/R/")
+setwd("C:/Users/hiagh/Desktop/R/all_sim_data/")
 home.dir <- getwd()
 #dir.of.GBS.SNPs <- "/Users/adminuser/Desktop/Work/Tocos_NAM_2009_2010/Joint_Linkage_Analysis/GBS_SNPs/"
 
@@ -197,6 +197,7 @@ Additive.QTN.number <- 400
 
 #Number of epistatic QTN (m)
 Epistatic.QTN.number <- 400
+
 for(i in 1:9){
 #Vector of heritabilities to investigate
 heritabilities.vector <- as.numeric(paste(0,i,sep = "."))
@@ -212,7 +213,7 @@ epistatic.effect <- 0.6
 replicates <- 100
 
 #Output directory
-output.dir <- paste("EMPandAdditive",Additive.QTN.number,"_Add_QTN_",Epistatic.QTN.number,"_Epi_QTN_h.2_",
+output.dir <- paste("IBMandAdditive",Additive.QTN.number,"_Add_QTN_",Epistatic.QTN.number,"_Epi_QTN_h.2_",
                     heritabilities.vector,"_add.eff_", additive.effect,"_epis.eff_", epistatic.effect,"_reps_", replicates, sep = "")
 
 ################
@@ -220,7 +221,3 @@ output.dir <- paste("EMPandAdditive",Additive.QTN.number,"_Add_QTN_",Epistatic.Q
 create.simluated.data()
 setwd("../")
 }
-
-
-
-
