@@ -16,13 +16,15 @@ genos <- read.csv("all_sim_data/simulation_analyses_0.8/IBM_sample_final1.csv",h
 ##Create Matrices for data to be inserted in to
 ```{r}
 setwd("all_sim_data/simulation_analyses_0.8")
-sigs <- read.table(file = "simulation_data/Genotypic.information.for.4.Additive.QTN.txt",stringsAsFactors=F,header=T)[,1]
-twosigs <- read.table(file = "simulation_data/Genotypic.information.for.4.Epistatic.QTN.txt",stringsAsFactors=F,header=T)[,1]
-results <- matrix(NA,nrow=100,ncol=5)
-tworesults <- matrix(NA, nrow = 9, ncol = 100)
+sigs <- read.table(file = "simulation_data/Genotypic.information.for.400.Additive.QTN.txt",stringsAsFactors=F,header=T, sep = "\t")[,1]
+twosigs <- read.table(file = "simulation_data/Genotypic.information.for.400.Epistatic.QTN.txt",stringsAsFactors=F,header=T, sep = "\t")[,1]
+results <- matrix(NA,nrow=100,ncol=401)
+tworesults <- matrix(NA, nrow = 801, ncol = 100)
 rownames(tworesults) <- c("threshold",twosigs)
 ```
+
 ##Loop over analysis
+
 ###Composite Interval Mapping (Additive search)
 ```{r}
 setwd("all_sim_data/simulation_analyses_0.8")
@@ -79,18 +81,14 @@ for(i in 1:100){
   rownames(foo) <- rownames(CIM)
   colnames(foo) <- rownames(CIM)
   
-  int1x2 <- foo[rownames = twosigs[1],colnames = twosigs[2]]
+  tworesults[1,i] <- thresh
   
-  int3x4 <- foo[rownames = twosigs[3],colnames = twosigs[4]]
-  
-  int5x6 <- foo[rownames = twosigs[5],colnames = twosigs[6]]
-  
-  int7x8 <- foo[rownames = twosigs[7],colnames = twosigs[8]]
-  
-  twocols <- rbind(twothresh,int1x2,"",int3x4,"",int5x6,"",int7x8,"") 
-  
-  tworesults[,i] <- twocols
-}
+  for(j in 1:799){
+    if(!j %% 2){
+      next
+    }
+  tworesults[j+1,i] <- foo[rownames = twosigs[j],colnames = twosigs[j+1]]
+}}
 ```
 
 ##Export results to csv files
