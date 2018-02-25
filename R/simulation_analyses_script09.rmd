@@ -3,6 +3,11 @@ title: "Simulation Analyses 09"
 output: html_document
 ---
 
+```{r}
+library("qtl")
+library("rmarkdown")
+```
+
 ##Read matrix of all simulated data
 ```{r}
 allSims <- read.table(file = "all_sim_data/simulation_analyses_0.9/simulation_data/Simulated.Data.100.Reps.Herit.0.9.txt",header=T,stringsAsFactors=F)
@@ -10,7 +15,7 @@ allSims <- read.table(file = "all_sim_data/simulation_analyses_0.9/simulation_da
 
 ##Read genotypes
 ```{r}
-genos <- read.csv("all_sim_data/simulation_analyses_0.9/IBM_sample_final1.csv",header=T,stringsAsFactors=F,na.strings=c("-","NA"))
+genos <- read.csv("all_sim_data/IBM_sample_final1.csv",header=T,stringsAsFactors=F,na.strings=c("-","NA"))
 ```
 
 ##Create Matrices for data to be inserted in to
@@ -52,7 +57,7 @@ for(i in 2:ncol(allSims)){
   lod <- as.matrix(CIM$lod)
   rownames(lod) <- colnames(genos)[2:1340]
   first<- c(thresh,lod[rownames = sigs,])
-  results[i-1,1:5] <- first
+  results[i-1,1:401] <- first
 }
 ```
 ###Scantwo (epistatic search)
