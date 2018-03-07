@@ -57,10 +57,10 @@ for(i in 1:100){
   
   foo <- matrix(scantwo$lod, nrow = 1339, ncol = 1339)
   foo <- f(foo)
-  rownames(foo) <- rownames(CIM)
-  colnames(foo) <- rownames(CIM)
+  rownames(foo) <- colnames(genos[2:ncol(genos)])
+  colnames(foo) <- colnames(genos[2:ncol(genos)])
   
-  tworesults[1,i] <- thresh
+  tworesults[1,i] <- twothresh
   
   for(j in 1:799){
     if(!j %% 2){
