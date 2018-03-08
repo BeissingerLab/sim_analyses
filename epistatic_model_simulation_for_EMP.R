@@ -189,7 +189,7 @@ genotypes <- Data5
 #User input
 
 #Number of additive QTN (k)
-Additive.QTN.number <- 400
+Additive.QTN.number <- 0
 
 
 #Number of epistatic QTN (m)
@@ -211,10 +211,11 @@ epistatic.effect <- 0.6
 replicates <- 100
 
 #Output directory
-output.dir <- paste("EMPandAdditive",Additive.QTN.number,"_Add_QTN_",Epistatic.QTN.number,"_Epi_QTN_h.2_",
+output.dir <- paste("EMP_",Additive.QTN.number,"_Add_QTN_",Epistatic.QTN.number,"_Epi_QTN_h.2_",
                     heritabilities.vector,"_add.eff_", additive.effect,"_epis.eff_", epistatic.effect,"_reps_", replicates, sep = "")
 
 ################
 #Create the simulated data
 create.simluated.data()
-setwd("../")}
+setwd("../")
+}

@@ -21,8 +21,8 @@ genos <- read.csv("all_sim_data/IBM_sample_final1.csv",header=T,stringsAsFactors
 ##Create Matrices for data to be inserted in to
 ```{r}
 setwd("all_sim_data/simulation_analyses_0.1")
-twosigs <- read.table(file = "simulation_data/Genotypic.information.for.400.Epistatic.QTN.txt",stringsAsFactors=F,header=T, sep = "\t")[,1]
-tworesults <- matrix(NA, nrow = 801, ncol = 100)
+twosigs <- read.table(file = "simulation_data/Genotypic.information.for.10.Epistatic.QTN.txt",stringsAsFactors=F,header=T, sep = "\t")[,1]
+tworesults <- matrix(NA, nrow = length(twosigs)+1, ncol = 100)
 rownames(tworesults) <- c("threshold",twosigs)
 ```
 
@@ -62,7 +62,7 @@ for(i in 1:100){
   
   tworesults[1,i] <- twothresh
   
-  for(j in 1:799){
+  for(j in 1:(length(twosigs))){
     if(!j %% 2){
       next
     }
@@ -72,6 +72,6 @@ for(i in 1:100){
 
 ##Export results to csv files
 ```{r}
-  setwd("all_sim_data/simulation_analyses_0.1")
+  setwd("all_sim_data/results")
 write.csv(tworesults, file = paste("results.epistatic.0.1.csv"))
 ```

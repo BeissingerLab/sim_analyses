@@ -3,7 +3,7 @@ title: "IBM Graphs"
 output: html_document
 ---
 
-```{r}
+```{r, include=FALSE}
 
 setwd("/Users/hiagh/OneDrive/Documents/GitHub/sim_analyses/results/")
 
@@ -32,7 +32,7 @@ H01 <- length(results1[which(is.na(results1) == F)])
 
 ```
 
-```{r}
+```{r, include=FALSE}
 
 setwd("/Users/hiagh/OneDrive/Documents/GitHub/sim_analyses/results/")
 
@@ -61,7 +61,7 @@ H02 <- length(results2[which(is.na(results2) == F)])
 
 ```
 
-```{r}
+```{r, include=FALSE}
 
 setwd("/Users/hiagh/OneDrive/Documents/GitHub/sim_analyses/results/")
 
@@ -90,7 +90,7 @@ H03 <- length(results3[which(is.na(results3) == F)])
 
 ```
 
-```{r}
+```{r, include=FALSE}
 
 setwd("/Users/hiagh/OneDrive/Documents/GitHub/sim_analyses/results/")
 
@@ -119,7 +119,7 @@ H04 <- length(results4[which(is.na(results4) == F)])
 
 ```
 
-```{r}
+```{r, include=FALSE}
 
 setwd("/Users/hiagh/OneDrive/Documents/GitHub/sim_analyses/results/")
 
@@ -148,7 +148,7 @@ H05 <- length(results5[which(is.na(results5) == F)])
 
 ```
 
-```{r}
+```{r, include=FALSE}
 
 setwd("/Users/hiagh/OneDrive/Documents/GitHub/sim_analyses/results/")
 
@@ -177,7 +177,7 @@ H06 <- length(results6[which(is.na(results6) == F)])
 
 ```
 
-```{r}
+```{r, include=FALSE}
 
 setwd("/Users/hiagh/OneDrive/Documents/GitHub/sim_analyses/results/")
 
@@ -207,7 +207,7 @@ H07 <- length(results7[which(is.na(results7) == F)])
 
 ```
 
-```{r}
+```{r, include=FALSE}
 
 setwd("/Users/hiagh/OneDrive/Documents/GitHub/sim_analyses/results/")
 
@@ -237,7 +237,7 @@ H08 <- length(results8[which(is.na(results8) == F)])
 
 ```
 
-```{r}
+```{r, include=FALSE}
 
 setwd("/Users/hiagh/OneDrive/Documents/GitHub/sim_analyses/results/")
 

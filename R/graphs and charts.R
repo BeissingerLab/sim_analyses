@@ -18,10 +18,10 @@ for(i in 2:800){
   rownames[i/2,] <- paste(rownames(herit01[i,]), rownames(herit01[i+1,]), sep = "x")
 }}
 rownames(foo01) <- c("threshold", rownames)
-
+results <- matrix(NA, nrow = 401, ncol = 100)
 for(i in 1:100){
-  for(j in 2:5){
-    if(full01[j,i]>full01[1,i]){fullmat01[j,i] <- print(full01[j,i])}
+  for(j in 2:401){
+    if(foo01[j,i]>foo01[1,i]){results[j,i] <- print(foo01[j,i])}
   }}
 
 full02 <- read.csv("results.epistatic.0.2.csv")[c(1,2,4,6,8), 2:101]

@@ -57,7 +57,7 @@ create.simluated.data <- function(){
   # number used
   write.table(paste("Here_is_the_seed_number:_",seed.number, sep = ""), paste("Seed.number.for.", Epistatic.QTN.number,"Epi.QTN",
                                                                               ".txt", sep = ""), row.names = FALSE, col.names = FALSE, sep = "\t",  quote = FALSE)
-  write.table(Epi.QTN.genotypic.information, paste("Genotypic.information.for.", Epistatic.QTN.number,".Epistatic.QTN",
+  write.table(Epi.QTN.genotypic.information, paste("Genotypic.information.for.",".Epistatic.QTN",
                                                    ".txt", sep = ""), row.names = FALSE, sep = "\t",  quote = FALSE)
   
   
@@ -175,7 +175,7 @@ create.simluated.data <- function(){
 ###########################################################################################
 ###########################################################################################
 #setwd("/Users/adminuser/Box Sync/Lipka_Mainzer_Chen_Epistasis_Shared_Folder/Simulation_Study")
-setwd("C:/Users/hiagh/Desktop/R/all_sim_data/")
+setwd("C:/Users/hiagh/OneDrive/Documents/GitHub/sim_analyses/R/all_sim_data/")
 home.dir <- getwd()
 #dir.of.GBS.SNPs <- "/Users/adminuser/Desktop/Work/Tocos_NAM_2009_2010/Joint_Linkage_Analysis/GBS_SNPs/"
 
@@ -192,11 +192,11 @@ genotypes <- Data5
 #User input
 
 #Number of additive QTN (k)
-Additive.QTN.number <- 400
+Additive.QTN.number <- 10
 
 
 #Number of epistatic QTN (m)
-Epistatic.QTN.number <- 400
+Epistatic.QTN.number <- 10
 
 for(i in 1:9){
 #Vector of heritabilities to investigate
@@ -213,8 +213,8 @@ epistatic.effect <- 0.6
 replicates <- 100
 
 #Output directory
-output.dir <- paste("IBMandAdditive",Additive.QTN.number,"_Add_QTN_",Epistatic.QTN.number,"_Epi_QTN_h.2_",
-                    heritabilities.vector,"_add.eff_", additive.effect,"_epis.eff_", epistatic.effect,"_reps_", replicates, sep = "")
+output.dir <- paste("IBM_",Epistatic.QTN.number,"_QTN_h.2_",
+                    heritabilities.vector,"_epis.eff_", epistatic.effect,"_reps_", replicates, sep = "")
 
 ################
 #Create the simulated data
