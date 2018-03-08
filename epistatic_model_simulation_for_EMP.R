@@ -4,7 +4,7 @@ Data <- read.csv("C:/Users/hiagh/Desktop/R/Idealized_EMP_genos.csv",stringsAsFac
 Data2 <- as.matrix(Data)
 Data3 <- Data2[,1:5]
 Data4 <- cbind(Data3,Data2[,6:ncol(Data2)])
-Data5 <- as.data.frame(Data4[,1:195],stringsAsFactors=F)
+Data5 <- as.data.frame(Data4,stringsAsFactors=F)
 Data5[,6:ncol(Data5)] <- apply(Data5[,6:ncol(Data5)],2,as.numeric)
 #########################################
 
@@ -189,7 +189,7 @@ genotypes <- Data5
 #User input
 
 #Number of additive QTN (k)
-Additive.QTN.number <- 0
+Additive.QTN.number <- 400
 
 
 #Number of epistatic QTN (m)
