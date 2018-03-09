@@ -1,5 +1,5 @@
 ---
-title: "Simulation Analyses 08"
+title: "Simulation Analyses 09"
 output: html_document
 ---
 
@@ -10,7 +10,7 @@ library("rmarkdown")
 
 ##Read matrix of all simulated data
 ```{r}
-allSims <- read.table(file = "all_sim_data/simulation_analyses_0.8/simulation_data/Simulated.Data.100.Reps.Herit.0.8.txt",header=T,stringsAsFactors=F)
+allSims <- read.table(file = "all_sim_data/simulation_analyses_0.9/simulation_data/Simulated.Data.100.Reps.Herit.0.9.txt",header=T,stringsAsFactors=F)
 ```
 
 ##Read genotypes
@@ -20,9 +20,9 @@ genos <- read.csv("all_sim_data/IBM_sample_final1.csv",header=T,stringsAsFactors
 
 ##Create Matrices for data to be inserted in to
 ```{r}
-setwd("all_sim_data/simulation_analyses_0.8")
+setwd("all_sim_data/simulation_analyses_0.9")
 twosigs <- read.table(file = "simulation_data/Genotypic.information.for.10.Epistatic.QTN.txt",stringsAsFactors=F,header=T, sep = "\t")[,1]
-tworesults <- matrix(NA, nrow = length(twosigs)*2+1, ncol = 100)
+tworesults <- matrix(NA, nrow = length(twosigs)+1, ncol = 100)
 rownames(tworesults) <- c("threshold",twosigs)
 ```
 
@@ -33,7 +33,7 @@ rownames(tworesults) <- c("threshold",twosigs)
 f <- function(foo) {
     foo[upper.tri(foo)] <- t(foo)[upper.tri(foo)]
     foo}
-setwd("all_sim_data/simulation_analyses_0.8")
+setwd("all_sim_data/simulation_analyses_0.9")
 
 for(i in 2:ncol(allSims)){
   genos.tmp <- genos
@@ -73,5 +73,5 @@ for(i in 1:100){
 ##Export results to csv files
 ```{r}
   setwd("all_sim_data/results")
-write.csv(tworesults, file = paste("results.epistatic.0.8.csv"))
+write.csv(tworesults, file = paste("results.epistatic.0.9.csv"))
 ```
