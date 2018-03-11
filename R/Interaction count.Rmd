@@ -1,0 +1,27 @@
+---
+title: "Interaction Count"
+author: "Husain Agha"
+date: "March 3, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(root.dir = "/Users/hiagh/Desktop/R/all_sim_data/")
+```
+
+```{r read in data}
+interactions <- read.table("Genotypic.information.for.10.Epistatic.QTN.txt", header = T, sep = "\t")
+interactions <- interactions[,6:ncol(interactions)]
+phenotypes <- read.table("Simulated.Data.100.Reps.Herit.0.1.txt", header = T, sep = "\t", row.names = 1)
+```
+
+```{r counts}
+interaction_count <- matrix(0, nrow = ncol(interactions), ncol = 1)
+for(i in seq(1,nrow(interactions)-1,2)){
+  for(j in 1:ncol(interactions)){
+    counts <- if(interations[i,j] + interactions[i+1,j] == 2){
+      interaction_count[i,1] <- interaction_count[i,1] + 1
+    }
+  }
+}
