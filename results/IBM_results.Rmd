@@ -1,5 +1,7 @@
 ---
-title: "IBM Graphs"
+title: "IBM Simulations with 10 Epistatic QTL"
+author: "Husain Agha"
+date: "March 9, 2018"
 output: html_document
 ---
 
@@ -7,268 +9,1602 @@ output: html_document
 
 setwd("/Users/hiagh/OneDrive/Documents/GitHub/sim_analyses/results/")
 
-herit01 <- read.csv("results.epistatic.0.1.csv", header = T, row.names = 1)
-foo01 <- (herit01[1,])
+herit <- read.csv("results.epistatic.0.1_1qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
 
-for(i in 2:800){
+for(i in 2:nrow(herit)-1){
   if(!i %% 2){
-  foo01 <- rbind(foo01, herit01[i,])
+  foo <- rbind(foo, herit[i,])
   
     }
 }
-rownames <- matrix(NA, nrow = 400, ncol = 1)
-for(i in 2:800){
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
   if(!i %% 2){
-  rownames[i/2,] <- paste(rownames(herit01[i,]), rownames(herit01[i+1,]), sep = "x")
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
 }}
-rownames(foo01) <- c("threshold", rownames)
-results1 <- matrix(NA, nrow = 400, ncol = 100)
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
 for(i in 1:100){
-  for(j in 2:401){
-    if(foo01[j,i]>foo01[1,i]){results1[j-1,i] <- print(foo01[j,i])}
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
   }}
-row.names(results1) <- rownames
-H01 <- length(results1[which(is.na(results1) == F)])
+row.names(results) <- rownames
+H01 <- length(results[which(is.na(results) == F)])
 
+
+herit <- read.csv("results.epistatic.0.2_1qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+H02 <- length(results[which(is.na(results) == F)])
+
+herit <- read.csv("results.epistatic.0.3_1qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+H03 <- length(results[which(is.na(results) == F)])
+
+
+herit <- read.csv("results.epistatic.0.4_1qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+H04 <- length(results[which(is.na(results) == F)])
+
+
+herit <- read.csv("results.epistatic.0.5_1qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+H05 <- length(results[which(is.na(results) == F)])
+
+
+herit <- read.csv("results.epistatic.0.6_1qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+H06 <- length(results[which(is.na(results) == F)])
+
+
+herit <- read.csv("results.epistatic.0.7_1qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+
+H07 <- length(results[which(is.na(results) == F)])
+
+
+herit <- read.csv("results.epistatic.0.8_1qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+
+H08 <- length(results[which(is.na(results) == F)])
+
+herit <- read.csv("results.epistatic.0.9_1qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+
+H09 <- length(results[which(is.na(results) == F)])
+
+make.plot.1 <- data.frame(c(0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9))
+make.plot.1$QTL <- (nrow(rownames))
+make.plot.1$Detection_Rate <- c(H01/(nrow(rownames)*100),H02/(nrow(rownames)*100),H03/(nrow(rownames)*100),H04/(nrow(rownames)*100),H05/(nrow(rownames)*100),H06/(nrow(rownames)*100),H07/(nrow(rownames)*100),H08/(nrow(rownames)*100),H09/(nrow(rownames)*100)
+)
+names(make.plot.1) <- c("heritability","QTL","Detection_Rate")
 ```
 
 ```{r, include=FALSE}
 
 setwd("/Users/hiagh/OneDrive/Documents/GitHub/sim_analyses/results/")
 
-herit02 <- read.csv("results.epistatic.0.2.csv", header = T, row.names = 1)
-foo02 <- (herit02[1,])
+herit <- read.csv("results.epistatic.0.1_2qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
 
-for(i in 2:800){
+for(i in 2:nrow(herit)-1){
   if(!i %% 2){
-  foo02 <- rbind(foo02, herit02[i,])
+  foo <- rbind(foo, herit[i,])
   
     }
 }
-rownames <- matrix(NA, nrow = 400, ncol = 1)
-for(i in 2:800){
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
   if(!i %% 2){
-  rownames[i/2,] <- paste(rownames(herit02[i,]), rownames(herit02[i+1,]), sep = "x")
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
 }}
-rownames(foo02) <- c("threshold", rownames)
-results2 <- matrix(NA, nrow = 400, ncol = 100)
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
 for(i in 1:100){
-  for(j in 2:401){
-    if(foo02[j,i]>foo02[1,i]){results2[j-1,i] <- print(foo02[j,i])}
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
   }}
-row.names(results2) <- rownames
-H02 <- length(results2[which(is.na(results2) == F)])
+row.names(results) <- rownames
+H01 <- length(results[which(is.na(results) == F)])
 
+
+herit <- read.csv("results.epistatic.0.2_2qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+H02 <- length(results[which(is.na(results) == F)])
+
+herit <- read.csv("results.epistatic.0.3_2qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+H03 <- length(results[which(is.na(results) == F)])
+
+
+herit <- read.csv("results.epistatic.0.4_2qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+H04 <- length(results[which(is.na(results) == F)])
+
+
+herit <- read.csv("results.epistatic.0.5_2qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+H05 <- length(results[which(is.na(results) == F)])
+
+
+herit <- read.csv("results.epistatic.0.6_2qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+H06 <- length(results[which(is.na(results) == F)])
+
+
+herit <- read.csv("results.epistatic.0.7_2qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+
+H07 <- length(results[which(is.na(results) == F)])
+
+
+herit <- read.csv("results.epistatic.0.8_2qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+
+H08 <- length(results[which(is.na(results) == F)])
+
+herit <- read.csv("results.epistatic.0.9_2qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+
+H09 <- length(results[which(is.na(results) == F)])
+
+make.plot.2 <- data.frame(c(0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9))
+make.plot.2$QTL <- (nrow(rownames))
+make.plot.2$Detection_Rate <- c(H01/(nrow(rownames)*100),H02/(nrow(rownames)*100),H03/(nrow(rownames)*100),H04/(nrow(rownames)*100),H05/(nrow(rownames)*100),H06/(nrow(rownames)*100),H07/(nrow(rownames)*100),H08/(nrow(rownames)*100),H09/(nrow(rownames)*100)
+)
+names(make.plot.2) <- c("heritability","QTL","Detection_Rate")
+```
+
+###```{r, include=FALSE}
+
+setwd("/Users/hiagh/OneDrive/Documents/GitHub/sim_analyses/results/")
+
+herit <- read.csv("results.epistatic.0.1_5qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+H01 <- length(results[which(is.na(results) == F)])
+
+
+herit <- read.csv("results.epistatic.0.2_5qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+H02 <- length(results[which(is.na(results) == F)])
+
+herit <- read.csv("results.epistatic.0.3_5qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+H03 <- length(results[which(is.na(results) == F)])
+
+
+herit <- read.csv("results.epistatic.0.4_5qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+H04 <- length(results[which(is.na(results) == F)])
+
+
+herit <- read.csv("results.epistatic.0.5_5qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+H05 <- length(results[which(is.na(results) == F)])
+
+
+herit <- read.csv("results.epistatic.0.6_5qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+H06 <- length(results[which(is.na(results) == F)])
+
+
+herit <- read.csv("results.epistatic.0.7_5qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+
+H07 <- length(results[which(is.na(results) == F)])
+
+
+herit <- read.csv("results.epistatic.0.8_5qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+
+H08 <- length(results[which(is.na(results) == F)])
+
+herit <- read.csv("results.epistatic.0.9_5qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+
+H09 <- length(results[which(is.na(results) == F)])
+
+make.plot.5 <- data.frame(c(0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9))
+make.plot.5$QTL <- (nrow(rownames))
+make.plot.5$Detection_Rate <- c(H01/(nrow(rownames)*100),H02/(nrow(rownames)*100),H03/(nrow(rownames)*100),H04/(nrow(rownames)*100),H05/(nrow(rownames)*100),H06/(nrow(rownames)*100),H07/(nrow(rownames)*100),H08/(nrow(rownames)*100),H09/(nrow(rownames)*100)
+)
+names(make.plot.5) <- c("heritability","QTL","Detection_Rate")
+###```
+
+```{r, include=FALSE}
+
+setwd("/Users/hiagh/OneDrive/Documents/GitHub/sim_analyses/results/")
+
+herit <- read.csv("results.epistatic.0.1_10qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+H01 <- length(results[which(is.na(results) == F)])
+
+
+herit <- read.csv("results.epistatic.0.2_10qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+H02 <- length(results[which(is.na(results) == F)])
+
+herit <- read.csv("results.epistatic.0.3_10qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+H03 <- length(results[which(is.na(results) == F)])
+
+
+herit <- read.csv("results.epistatic.0.4_10qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+H04 <- length(results[which(is.na(results) == F)])
+
+
+herit <- read.csv("results.epistatic.0.5_10qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+H05 <- length(results[which(is.na(results) == F)])
+
+
+herit <- read.csv("results.epistatic.0.6_10qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+H06 <- length(results[which(is.na(results) == F)])
+
+
+herit <- read.csv("results.epistatic.0.7_10qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+
+H07 <- length(results[which(is.na(results) == F)])
+
+
+herit <- read.csv("results.epistatic.0.8_10qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+
+H08 <- length(results[which(is.na(results) == F)])
+
+herit <- read.csv("results.epistatic.0.9_10qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+
+H09 <- length(results[which(is.na(results) == F)])
+
+make.plot.10 <- data.frame(c(0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9))
+make.plot.10$QTL <- (nrow(rownames))
+make.plot.10$Detection_Rate <- c(H01/(nrow(rownames)*100),H02/(nrow(rownames)*100),H03/(nrow(rownames)*100),H04/(nrow(rownames)*100),H05/(nrow(rownames)*100),H06/(nrow(rownames)*100),H07/(nrow(rownames)*100),H08/(nrow(rownames)*100),H09/(nrow(rownames)*100)
+)
+names(make.plot.10) <- c("heritability","QTL","Detection_Rate")
 ```
 
 ```{r, include=FALSE}
 
 setwd("/Users/hiagh/OneDrive/Documents/GitHub/sim_analyses/results/")
 
-herit03 <- read.csv("results.epistatic.0.3.csv", header = T, row.names = 1)
-foo03 <- (herit03[1,])
+herit <- read.csv("results.epistatic.0.1_25qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
 
-for(i in 2:800){
+for(i in 2:nrow(herit)-1){
   if(!i %% 2){
-  foo03 <- rbind(foo03, herit03[i,])
+  foo <- rbind(foo, herit[i,])
   
     }
 }
-rownames <- matrix(NA, nrow = 400, ncol = 1)
-for(i in 2:800){
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
   if(!i %% 2){
-  rownames[i/2,] <- paste(rownames(herit03[i,]), rownames(herit03[i+1,]), sep = "x")
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
 }}
-rownames(foo03) <- c("threshold", rownames)
-results3 <- matrix(NA, nrow = 400, ncol = 100)
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
 for(i in 1:100){
-  for(j in 2:401){
-    if(foo03[j,i]>foo03[1,i]){results3[j-1,i] <- print(foo03[j,i])}
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
   }}
-row.names(results3) <- rownames
-H03 <- length(results3[which(is.na(results3) == F)])
+row.names(results) <- rownames
+H01 <- length(results[which(is.na(results) == F)])
 
+
+herit <- read.csv("results.epistatic.0.2_25qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+H02 <- length(results[which(is.na(results) == F)])
+
+herit <- read.csv("results.epistatic.0.3_25qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+H03 <- length(results[which(is.na(results) == F)])
+
+
+herit <- read.csv("results.epistatic.0.4_25qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+H04 <- length(results[which(is.na(results) == F)])
+
+
+herit <- read.csv("results.epistatic.0.5_25qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+H05 <- length(results[which(is.na(results) == F)])
+
+
+herit <- read.csv("results.epistatic.0.6_25qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+H06 <- length(results[which(is.na(results) == F)])
+
+
+herit <- read.csv("results.epistatic.0.7_25qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+
+H07 <- length(results[which(is.na(results) == F)])
+
+
+herit <- read.csv("results.epistatic.0.8_25qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+
+H08 <- length(results[which(is.na(results) == F)])
+
+herit <- read.csv("results.epistatic.0.9_25qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+
+H09 <- length(results[which(is.na(results) == F)])
+
+make.plot.25 <- data.frame(c(0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9))
+make.plot.25$QTL <- (nrow(rownames))
+make.plot.25$Detection_Rate <- c(H01/(nrow(rownames)*100),H02/(nrow(rownames)*100),H03/(nrow(rownames)*100),H04/(nrow(rownames)*100),H05/(nrow(rownames)*100),H06/(nrow(rownames)*100),H07/(nrow(rownames)*100),H08/(nrow(rownames)*100),H09/(nrow(rownames)*100)
+)
+names(make.plot.25) <- c("heritability","QTL","Detection_Rate")
 ```
 
 ```{r, include=FALSE}
 
 setwd("/Users/hiagh/OneDrive/Documents/GitHub/sim_analyses/results/")
 
-herit04 <- read.csv("results.epistatic.0.4.csv", header = T, row.names = 1)
-foo04 <- (herit04[1,])
+herit <- read.csv("results.epistatic.0.1_50qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
 
-for(i in 2:800){
+for(i in 2:nrow(herit)-1){
   if(!i %% 2){
-  foo04 <- rbind(foo04, herit04[i,])
+  foo <- rbind(foo, herit[i,])
   
     }
 }
-rownames <- matrix(NA, nrow = 400, ncol = 1)
-for(i in 2:800){
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
   if(!i %% 2){
-  rownames[i/2,] <- paste(rownames(herit04[i,]), rownames(herit04[i+1,]), sep = "x")
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
 }}
-rownames(foo04) <- c("threshold", rownames)
-results4 <- matrix(NA, nrow = 400, ncol = 100)
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
 for(i in 1:100){
-  for(j in 2:401){
-    if(foo04[j,i]>foo04[1,i]){results4[j-1,i] <- print(foo04[j,i])}
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
   }}
-row.names(results4) <- rownames
-H04 <- length(results4[which(is.na(results4) == F)])
+row.names(results) <- rownames
+H01 <- length(results[which(is.na(results) == F)])
 
+
+herit <- read.csv("results.epistatic.0.2_50qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+H02 <- length(results[which(is.na(results) == F)])
+
+herit <- read.csv("results.epistatic.0.3_50qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+H03 <- length(results[which(is.na(results) == F)])
+
+
+herit <- read.csv("results.epistatic.0.4_50qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+H04 <- length(results[which(is.na(results) == F)])
+
+
+herit <- read.csv("results.epistatic.0.5_50qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+H05 <- length(results[which(is.na(results) == F)])
+
+
+herit <- read.csv("results.epistatic.0.6_50qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+H06 <- length(results[which(is.na(results) == F)])
+
+
+herit <- read.csv("results.epistatic.0.7_50qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+
+H07 <- length(results[which(is.na(results) == F)])
+
+
+herit <- read.csv("results.epistatic.0.8_50qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+
+H08 <- length(results[which(is.na(results) == F)])
+
+herit <- read.csv("results.epistatic.0.9_50qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+
+H09 <- length(results[which(is.na(results) == F)])
+
+make.plot.50 <- data.frame(c(0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9))
+make.plot.50$QTL <- (nrow(rownames))
+make.plot.50$Detection_Rate <- c(H01/(nrow(rownames)*100),H02/(nrow(rownames)*100),H03/(nrow(rownames)*100),H04/(nrow(rownames)*100),H05/(nrow(rownames)*100),H06/(nrow(rownames)*100),H07/(nrow(rownames)*100),H08/(nrow(rownames)*100),H09/(nrow(rownames)*100)
+)
+names(make.plot.50) <- c("heritability","QTL","Detection_Rate")
 ```
 
 ```{r, include=FALSE}
 
 setwd("/Users/hiagh/OneDrive/Documents/GitHub/sim_analyses/results/")
 
-herit05 <- read.csv("results.epistatic.0.5.csv", header = T, row.names = 1)
-foo05 <- (herit05[1,])
+herit <- read.csv("results.epistatic.0.1_100qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
 
-for(i in 2:800){
+for(i in 2:nrow(herit)-1){
   if(!i %% 2){
-  foo05 <- rbind(foo05, herit05[i,])
+  foo <- rbind(foo, herit[i,])
   
     }
 }
-rownames <- matrix(NA, nrow = 400, ncol = 1)
-for(i in 2:800){
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
   if(!i %% 2){
-  rownames[i/2,] <- paste(rownames(herit05[i,]), rownames(herit05[i+1,]), sep = "x")
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
 }}
-rownames(foo05) <- c("threshold", rownames)
-results5 <- matrix(NA, nrow = 400, ncol = 100)
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
 for(i in 1:100){
-  for(j in 2:401){
-    if(foo05[j,i]>foo05[1,i]){results5[j-1,i] <- print(foo05[j,i])}
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
   }}
-row.names(results5) <- rownames
-H05 <- length(results5[which(is.na(results5) == F)])
+row.names(results) <- rownames
+H01 <- length(results[which(is.na(results) == F)])
 
-```
 
-```{r, include=FALSE}
+herit <- read.csv("results.epistatic.0.2_100qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
 
-setwd("/Users/hiagh/OneDrive/Documents/GitHub/sim_analyses/results/")
-
-herit06 <- read.csv("results.epistatic.0.6.csv", header = T, row.names = 1)
-foo06 <- (herit06[1,])
-
-for(i in 2:800){
+for(i in 2:nrow(herit)-1){
   if(!i %% 2){
-  foo06 <- rbind(foo06, herit06[i,])
+  foo <- rbind(foo, herit[i,])
   
     }
 }
-rownames <- matrix(NA, nrow = 400, ncol = 1)
-for(i in 2:800){
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
   if(!i %% 2){
-  rownames[i/2,] <- paste(rownames(herit06[i,]), rownames(herit06[i+1,]), sep = "x")
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
 }}
-rownames(foo06) <- c("threshold", rownames)
-results6 <- matrix(NA, nrow = 400, ncol = 100)
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
 for(i in 1:100){
-  for(j in 2:401){
-    if(foo06[j,i]>foo06[1,i]){results6[j-1,i] <- print(foo06[j,i])}
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
   }}
-row.names(results6) <- rownames
-H06 <- length(results6[which(is.na(results6) == F)])
+row.names(results) <- rownames
+H02 <- length(results[which(is.na(results) == F)])
 
-```
+herit <- read.csv("results.epistatic.0.3_100qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
 
-```{r, include=FALSE}
-
-setwd("/Users/hiagh/OneDrive/Documents/GitHub/sim_analyses/results/")
-
-herit07 <- read.csv("results.epistatic.0.7.csv", header = T, row.names = 1)
-foo07 <- (herit07[1,])
-
-for(i in 2:800){
+for(i in 2:nrow(herit)-1){
   if(!i %% 2){
-  foo07 <- rbind(foo07, herit07[i,])
+  foo <- rbind(foo, herit[i,])
   
     }
 }
-rownames <- matrix(NA, nrow = 400, ncol = 1)
-for(i in 2:800){
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
   if(!i %% 2){
-  rownames[i/2,] <- paste(rownames(herit07[i,]), rownames(herit07[i+1,]), sep = "x")
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
 }}
-rownames(foo07) <- c("threshold", rownames)
-results7 <- matrix(NA, nrow = 400, ncol = 100)
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
 for(i in 1:100){
-  for(j in 2:401){
-    if(foo07[j,i]>foo07[1,i]){results7[j-1,i] <- print(foo07[j,i])}
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
   }}
-row.names(results7) <- rownames
+row.names(results) <- rownames
+H03 <- length(results[which(is.na(results) == F)])
 
-H07 <- length(results7[which(is.na(results7) == F)])
 
-```
+herit <- read.csv("results.epistatic.0.4_100qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
 
-```{r, include=FALSE}
-
-setwd("/Users/hiagh/OneDrive/Documents/GitHub/sim_analyses/results/")
-
-herit08 <- read.csv("results.epistatic.0.8.csv", header = T, row.names = 1)
-foo08 <- (herit08[1,])
-
-for(i in 2:800){
+for(i in 2:nrow(herit)-1){
   if(!i %% 2){
-  foo08 <- rbind(foo08, herit08[i,])
+  foo <- rbind(foo, herit[i,])
   
     }
 }
-rownames <- matrix(NA, nrow = 400, ncol = 1)
-for(i in 2:800){
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
   if(!i %% 2){
-  rownames[i/2,] <- paste(rownames(herit08[i,]), rownames(herit08[i+1,]), sep = "x")
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
 }}
-rownames(foo08) <- c("threshold", rownames)
-results8 <- matrix(NA, nrow = 400, ncol = 100)
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
 for(i in 1:100){
-  for(j in 2:401){
-    if(foo08[j,i]>foo08[1,i]){results8[j-1,i] <- print(foo08[j,i])}
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
   }}
-row.names(results8) <- rownames
+row.names(results) <- rownames
+H04 <- length(results[which(is.na(results) == F)])
 
-H08 <- length(results8[which(is.na(results8) == F)])
 
-```
+herit <- read.csv("results.epistatic.0.5_100qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
 
-```{r, include=FALSE}
-
-setwd("/Users/hiagh/OneDrive/Documents/GitHub/sim_analyses/results/")
-
-herit09 <- read.csv("results.epistatic.0.9.csv", header = T, row.names = 1)
-foo09 <- (herit09[1,])
-
-for(i in 2:800){
+for(i in 2:nrow(herit)-1){
   if(!i %% 2){
-  foo09 <- rbind(foo09, herit09[i,])
+  foo <- rbind(foo, herit[i,])
   
     }
 }
-rownames <- matrix(NA, nrow = 400, ncol = 1)
-for(i in 2:800){
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
   if(!i %% 2){
-  rownames[i/2,] <- paste(rownames(herit09[i,]), rownames(herit09[i+1,]), sep = "x")
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
 }}
-rownames(foo09) <- c("threshold", rownames)
-results9 <- matrix(NA, nrow = 400, ncol = 100)
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
 for(i in 1:100){
-  for(j in 2:401){
-    if(foo09[j,i]>foo09[1,i]){results9[j-1,i] <- print(foo09[j,i])}
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
   }}
-row.names(results9) <- rownames
+row.names(results) <- rownames
+H05 <- length(results[which(is.na(results) == F)])
 
-H09 <- length(results9[which(is.na(results9) == F)])
 
+herit <- read.csv("results.epistatic.0.6_100qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+H06 <- length(results[which(is.na(results) == F)])
+
+
+herit <- read.csv("results.epistatic.0.7_100qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+
+H07 <- length(results[which(is.na(results) == F)])
+
+
+herit <- read.csv("results.epistatic.0.8_100qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+
+H08 <- length(results[which(is.na(results) == F)])
+
+herit <- read.csv("results.epistatic.0.9_100qtl.csv", header = T, row.names = 1)
+foo <- (herit[1,])
+
+for(i in 2:nrow(herit)-1){
+  if(!i %% 2){
+  foo <- rbind(foo, herit[i,])
+  
+    }
+}
+rownames <- matrix(NA, nrow = (nrow(herit)-1)/2, ncol = 1)
+for(i in 2:nrow(herit)){
+  if(!i %% 2){
+  rownames[i/2,] <- paste(rownames(herit[i,]), rownames(herit[i+1,]), sep = "x")
+}}
+rownames(foo) <- c("threshold", rownames)
+results <- matrix(NA, nrow = nrow(foo)-1, ncol = 100)
+for(i in 1:100){
+  for(j in 2:nrow(foo)){
+    if(foo[j,i]>foo[1,i]){results[j-1,i] <- print(foo[j,i])}
+  }}
+row.names(results) <- rownames
+
+H09 <- length(results[which(is.na(results) == F)])
+
+make.plot.100 <- data.frame(c(0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9))
+make.plot.100$QTL <- (nrow(rownames))
+make.plot.100$Detection_Rate <- c(H01/(nrow(rownames)*100),H02/(nrow(rownames)*100),H03/(nrow(rownames)*100),H04/(nrow(rownames)*100),H05/(nrow(rownames)*100),H06/(nrow(rownames)*100),H07/(nrow(rownames)*100),H08/(nrow(rownames)*100),H09/(nrow(rownames)*100)
+)
+names(make.plot.100) <- c("heritability","QTL","Detection_Rate")
 ```
 
 
-```{r}
-plot(c(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),c(H01/40000,H02/40000,H03/40000,H04/40000,H05/40000,H06/40000,H07/40000,H08/40000,H09/40000),
-     type = "o", main = "Epistatic QTL Discovery Rate", xlab = "Heritability", ylab = "Discovery Rate", ylim = 0:1)
+```{r make plot}
+
+make.plot <- rbind(make.plot.1,make.plot.2,make.plot.10,make.plot.25,make.plot.50,make.plot.100)
+make.plot <- make.plot[order(make.plot$heritability),]
+
+plot(make.plot$heritability, make.plot$Detection_Rate, type = "o")
+lines(make.plot$QTL)
+make.plot$QTL <- factor(make.plot$QTL, levels = c(1,2,10,25,50,100))
+make.plot$heritability <- factor(make.plot$heritability, levels = c(0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9))
+
+str(make.plot)
+
 ```

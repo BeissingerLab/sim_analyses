@@ -1,0 +1,167 @@
+---
+title: "Annotated EMP Analysis"
+author: "Timothy M. Beissinger"
+date: "August 28, 2017"
+output: html_document
+---
+
+# In this script I will do EMP analysis of the 2017 EMP data and make some figures. Although I look at only Days-To-Silking below, this script is designed to demonstrate how EMPs can be analyzed for any trait.	
+
+### Load data and set trait name
+Here I will load the raw data, collected by Husain Agha and Alex Gregory in summer 2017. Trait name will be used later in the script.
+
+```{r}
+data <- read.table("/Users/hiagh/Desktop/R/all_sim_data/EMP_1_Add_QTN_1_Epi_QTN_h.2_0.7_add.eff_0.6_epis.eff_0.6_reps_100/Simulated.Data.100.Reps.Herit.0.7.txt", header = F)
+data1 <- as.matrix(data[2:nrow(data),])
+data <- data1[,1:2]
+for(i in 3:5){
+  data <- rbind(data,cbind(data1[,1], data1[,i]))
+}
+colnames(data) <- c("genotype","simulated.phenotype")
+data <- as.data.frame(data)
+data$location <- "location2"
+data$location[1:(nrow(data)/2)] <- "location1"
+data$location <- as.character(data$location)
+data$simulated.phenotype <- as.numeric(data1[,2])
+trait <- "Simulated Phenotypes"
+```
+
+### Raw data Histograms
+Here I will make histograms of the raw data
+```{r}
+histogram <- as.numeric(as.matrix(data[,2]))
+hist(histogram, main = "Simulated Phenotypes")
+```
+
+### Manipulate data
+Here I will add columns for the genotype of parent 1 and parent 2. Notice the lines below do text manipulation. They make all names consistently formatted and then separate parents on the "X".
+```{r}
+data$genotype <- gsub(" ", "", data$genotype, fixed = TRUE)
+data$genotype <- toupper(data$genotype)
+pList <- strsplit(as.character(data$genotype), split = "X")
+
+p1 <- c()
+p2 <- c()
+for(i in 1:length(pList)){
+  if (length(pList[[i]]) == 2){ p1[i] <- pList[[i]][2]; p2[i] <- pList[[i]][1]}
+  if (length(pList[[i]]) == 1){ p1[i] <- pList[[i]][1]; p2[i] <- NA}
+}
+
+data$Parent1 <- p1
+data$Parent2 <- p2
+```
+
+### Split data frames
+Below I make a few data frames. One for B73 alone, one for backcrosses, one for all "parents", which includes all B73 observations and all backcrosses, and finally one of crosses (excluding parents). Notice the strate comment in the middle. This is a re-ordering of factor levels so that all lines are compared to B73.
+
+```{r}
+B73obs <- data[which(data$Parent1 == "B73"),]
+Backcrosses <- data[which(data$Parent2 == "B73"),]
+allParents <- rbind(B73obs, Backcrosses)
+
+# The step below seems odd, but it re-orders the levels of the parents so that B73V4 is the base level for treatment contrasts
+allParents$Parent1 <- factor(allParents$Parent1, levels = c("B73","B004", "B015",  "B040", "B043","B044",  "B049",  "B055",  "B057",  "B078",  "B102",  "B107",  "B111",  "B123", "B125",  "B131", "B136",  "B144",  "B154",  "B169",  "B189"))
+
+All_EMPs <- data[which(data$Parent1 != "B73" & data$Parent2 != "B73" & is.na(data$Parent2) == F),]
+```
+
+
+# Part 2: Silking
+
+### Clean data THIS IS NOT NECESSARY FOR THE SIMULATED DATA
+Here I'll remove individuals with fewer than 2 observations in total. This is the only QC implemented at this stage.
+##```{r} 
+EMPs <- All_EMPs[-which(is.na(All_EMPs$Days.to.Silk)),]
+names(which(table(EMPs$genotype)==1))
+EMPs <- EMPs[-which(EMPs$genotype %in% names(which(table(EMPs$genotype)==1))),]
+##```
+
+### Run some simple models
+This step establishes "parental" and environmental base levels that can be compared to.
+```{r}
+base <- lm(simulated.phenotype ~ location + Parent1, data=allParents)
+Parents_coefficients <- base$coefficients[3:length(base$coefficients)]
+names(Parents_coefficients) <- unlist(strsplit(names(Parents_coefficients),split="Parent1"))[seq(2,length(Parents_coefficients)*2,2)]
+
+All_EMPs$location <- factor(All_EMPs$location,levels = c("location1","location2")) 
+emps_loc <- lm(simulated.phenotype ~ location, data = All_EMPs,na.action=na.exclude) #note na.action=na.exclude to keep NA values in residuals
+Loc_coef <- emps_loc$coefficients[2]
+Predicted_locs <- All_EMPs$simulated.phenotype
+Predicted_locs[which(All_EMPs$location=="location2")] <- Predicted_locs[which(All_EMPs$location=="location2")] + Loc_coef
+```
+
+### Make a data frame with various results
+Here I create a "results" data frame, which includes columns for everything that will be compared in the analysis.
+```{r}
+results <- data.frame(Genotype = All_EMPs$genotype, P1 = All_EMPs$Parent1, P2 = All_EMPs$Parent2, Loc_BLUPs = Predicted_locs,stringsAsFactors = F)
+
+Predicted = c()
+for(i in 1:nrow(results)){
+  Predicted[i] <- as.numeric(Parents_coefficients[results$P1[i]] + Parents_coefficients[results$P2[i]])
+}
+
+results$Predicted = Predicted
+
+results$Deviation = results$Loc_BLUPs - results$Predicted
+```
+
+### Calculate mean deviation from expected by genotype
+Here I calculate the mean deviation by genotype. In other words, this is the results matrix averaged over genotypes (instead of including a row for every plot in the field). These are the ultimate results.
+
+```{r}
+DeviationByGenotype <- aggregate(results$Deviation, by=list(results$Genotype),mean)
+StandardDeviationByGenotype <- aggregate(results$Deviation,by=list(results$Genotype),sd)
+```
+
+### Make a pretty plot
+This is the plot of EMP results. Notice that title should be recreated if trait under evaluation changes.
+
+```{r}
+ordered <- DeviationByGenotype[order(DeviationByGenotype[,2]),]
+ordered$SD <-StandardDeviationByGenotype[order(DeviationByGenotype[,2]),2]
+orderedNoNa <- ordered[which(is.na(ordered$x) ==F & is.na(ordered$SD) ==F),]
+
+col <- rep("black",nrow(orderedNoNa))
+col[which(orderedNoNa$x+1.96*orderedNoNa$SD < 0 | orderedNoNa$x-1.96*orderedNoNa$SD >0)]<-"dark green"
+plot(1:nrow(orderedNoNa),orderedNoNa$x,ylim=c(min(orderedNoNa$x-orderedNoNa$SD),max(orderedNoNa$x+orderedNoNa$SD)),pch=19,col=col,ylab="Deviation from additivity",xlab="EMP Line",main=paste("Evidence of Epistasis for", trait,sep=" "), cex.main = 1.75,cex.lab = 1.5,cex = 1.5)
+abline(h=0,lty=2, lwd = 3)
+segments(x0=1:nrow(orderedNoNa),y0={orderedNoNa$x-orderedNoNa$SD},x1=1:nrow(orderedNoNa),y1={orderedNoNa$x+orderedNoNa$SD},col=col, lwd = 3)
+legend("topleft","c(x,y",col=c("black","dark green"),pch=19,c("Insignificant","Significant"), cex = 1.5)
+```
+
+### Output plot
+This will output the plot to file.
+
+```{r}
+png("EMPs_heritability_0.7_1QTL.png")
+col <- rep("black",nrow(orderedNoNa))
+col[which(orderedNoNa$x+1.96*orderedNoNa$SD < 0 | orderedNoNa$x-1.96*orderedNoNa$SD >0)]<-"dark green"
+plot(1:nrow(orderedNoNa),orderedNoNa$x,ylim=c(min(orderedNoNa$x-orderedNoNa$SD),max(orderedNoNa$x+orderedNoNa$SD)),pch=19,col=col,ylab="Deviation from additivity",xlab="EMP Line",main=paste("Evidence of Epistasis for", trait,sep=" "))
+abline(h=0,lty=2, lwd=3)
+segments(x0=1:nrow(orderedNoNa),y0={orderedNoNa$x-orderedNoNa$SD},x1=1:nrow(orderedNoNa),y1={orderedNoNa$x+orderedNoNa$SD},col=col, lwd=2)
+legend("topleft","c(x,y",col=c("black","dark green"),pch=19,c("Insignificant","Significant"))
+dev.off()
+```
+
+### Determine how frequently each introgression (parent) was represented
+
+```{r}
+P1 <- unlist(strsplit(as.character(orderedNoNa$Group.1),split="X"))[seq(1,2*nrow(orderedNoNa),2)]
+P2 <- unlist(strsplit(as.character(orderedNoNa$Group.1),split="X"))[seq(2,2*nrow(orderedNoNa),2)]
+orderedNoNa$P1 <- P1
+orderedNoNa$P2 <- P2
+orderedNoNa$Sig <- rep("FALSE",nrow(orderedNoNa))
+orderedNoNa$Sig[which(col=="dark green")] <- TRUE
+sigIntrogressions <- c(orderedNoNa$P1[which(orderedNoNa$Sig == T)],orderedNoNa$P2[which(orderedNoNa$Sig == T)])
+par(las=1)
+par(mar=c(5,8,4,2))
+
+if(length(orderedNoNa$Sig[which(orderedNoNa$Sig == "TRUE")]) != 0){
+barplot(table(sigIntrogressions)[rev(order(table(sigIntrogressions)))],horiz=T,main=paste("Number of times each introgression was \n significant for", trait,"epistasis", sep=" "))
+
+png("heritability_0.7_1qtl_counts.png")
+par(las=1)
+par(mar=c(5,8,4,2))
+barplot(table(sigIntrogressions)[rev(order(table(sigIntrogressions)))],horiz=T,main=paste("Number of times each introgression was \n significant for", trait,"epistasis", sep=" "))
+dev.off()}
+```
